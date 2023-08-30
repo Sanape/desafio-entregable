@@ -10,12 +10,6 @@ class ProductManager {
       return productValidation.msg;
     }
 
-    // Misma funcionalidad implementando 'includes' visto en clase. Preferia usar 'some' para buscar directamente con el codigo sin mapear elementos
-    // if (this.products.map(existingProduct => existingProduct.code).includes(product.code)) {
-    //   console.log("Ya existe un producto con el mismo código.");
-    //   return;
-    // }
-
     this.products.push(product);
     return `${productValidation.msg} y agregado exitosamente`;
   }
@@ -51,6 +45,26 @@ class ProductManager {
         msg: 'El producto no cumple con los campos requeridos.',
       };
     }
+
+    // Misma funcionalidad implementando 'includes()' visto en clase. Preferia usar 'some' para buscar directamente con el codigo sin mapear elementos
+    // if (this.products.map(existingProduct => existingProduct.code).includes(product.code)) {
+    //   return {
+    //     result: false,
+    //     msg: 'Ya existe un producto con el mismo código.',
+    //   };
+    // }
+
+    //Idem pero con find()
+    // if (
+    //   this.products.find(
+    //     (existingProduct) => existingProduct.code === product.code
+    //   )
+    // ) {
+    //   return {
+    //     result: false,
+    //     msg: 'Ya existe un producto con el mismo código.',
+    //   };
+    // }
 
     if (
       this.products.some(
