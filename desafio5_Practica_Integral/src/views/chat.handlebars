@@ -1,13 +1,16 @@
 <h1>Chat</h1>
 <h3>{{error}}</h3>
-<form id="messageForm">
-  <input type="email" name="email" id="email" />
-  <input type="text" name="message" id="message" />
-  <input type="submit" value="SEND" />
+<form id='messageForm'>
+  <label for='email'>Correo</label>
+  <input type='email' name='email' id='email' />
+  <label for='message'>Mensaje</label>
+  <input type='text' name='message' id='message' />
+  <input type='submit' value='SEND' />
 </form>
+<button id='clearBtn'>Clear chat</button>
 <div>
-  <ul id="chat">
+  <ul id='chat'>
   </ul>
 </div>
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/chat.js"></script>
+<script src='/socket.io/socket.io.js'></script>
+<script src='/js/chat.js'></script>

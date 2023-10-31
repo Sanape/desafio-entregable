@@ -1,16 +1,16 @@
 const socketClient = io();
 let products = [];
-let error = "";
-const productsList = document.getElementById("productsList");
+let error = '';
+const productsList = document.getElementById('productsList');
 
-socketClient.emit("getAllProducts");
+socketClient.emit('getAllProducts');
 
-const addProductForm = document.getElementById("addProductForm");
-const updateProductForm = document.getElementById("updateProductForm");
-const deleteForm = document.getElementById("deleteForm");
+const addProductForm = document.getElementById('addProductForm');
+const updateProductForm = document.getElementById('updateProductForm');
+const deleteForm = document.getElementById('deleteForm');
 
-let updateProductId = document.getElementById("updateProductId");
-let deleteProductId = document.getElementById("deleteProductId");
+let updateProductId = document.getElementById('updateProductId');
+let deleteProductId = document.getElementById('deleteProductId');
 
 function validNewProduct(product) {
   return (
@@ -25,12 +25,12 @@ function validNewProduct(product) {
 addProductForm.onsubmit = async (e) => {
   e.preventDefault();
   let newProduct = {
-    title: document.getElementById("newProductTitle").value,
-    description: document.getElementById("newProductDescription").value,
-    price: document.getElementById("newProductPrice").value,
-    code: document.getElementById("newProductCode").value,
-    stock: document.getElementById("newProductStock").value,
-    category: document.getElementById("newProductCategory").value,
+    title: document.getElementById('newProductTitle').value,
+    description: document.getElementById('newProductDescription').value,
+    price: document.getElementById('newProductPrice').value,
+    code: document.getElementById('newProductCode').value,
+    stock: document.getElementById('newProductStock').value,
+    category: document.getElementById('newProductCategory').value,
     status: true,
   };
 
@@ -42,7 +42,7 @@ addProductForm.onsubmit = async (e) => {
 updateProductForm.onsubmit = async (e) => {
   e.preventDefault();
   let updateProductPrice = {
-    price: document.getElementById("updateProductPrice").value,
+    price: document.getElementById('updateProductPrice').value,
   };
   if (updateProductPrice.price !== 0 && updateProductId.value !== 0) {
     await updateProduct(updateProductId.value, updateProductPrice);
@@ -58,37 +58,49 @@ deleteForm.onsubmit = async (e) => {
 
 async function addNewProduct(product) {
   try {
-    const result = await fetch("http://localhost:8080/api/products", {
-      method: "POST",
+    const result = await fetch('http://localhost:8080/api/products', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
       body: JSON.stringify(product),
     });
 
-    console.log(await result.json())
+    if (result) {
+      socketClient.emit('getAllProducts');
 
-    if(result){
-      socketClient.emit("getAllProducts");
+      // Clear the input fields here, after the new product has been added
+      document.getElementById('newProductTitle').value = '';
+      document.getElementById('newProductDescription').value = '';
+      document.getElementById('newProductPrice').value = '';
+      document.getElementById('newProductCode').value = '';
+      document.getElementById('newProductStock').value = '';
+      document.getElementById('newProductCategory').value = '';
     }
   } catch (err) {
-    console.log(err)
+    console.log(err);
     error = err;
   }
 }
 
 async function updateProduct(idProduct, product) {
   try {
-    const result = await fetch(`http://localhost:8080/api/products/${idProduct}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(product),
-    });
+    const result = await fetch(
+      `http://localhost:8080/api/products/${idProduct}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(product),
+      }
+    );
 
-    if(result){
-      socketClient.emit("getAllProducts");
+    if (result) {
+      socketClient.emit('getAllProducts');
+      // Clear the input fields here, after the product has been updated
+      document.getElementById('updateProductId').value = '';
+      document.getElementById('updateProductPrice').value = '';
     }
   } catch (err) {
     error = err;
@@ -97,12 +109,17 @@ async function updateProduct(idProduct, product) {
 
 async function deleteProduct(idProduct) {
   try {
-    const result = await fetch(`http://localhost:8080/api/products/${idProduct}`, {
-      method: "DELETE",
-    });
+    const result = await fetch(
+      `http://localhost:8080/api/products/${idProduct}`,
+      {
+        method: 'DELETE',
+      }
+    );
 
-    if(result){
-      socketClient.emit("getAllProducts");
+    if (result) {
+      socketClient.emit('getAllProducts');
+      // Clear the input field here, after the product has been deleted
+      document.getElementById('deleteProductId').value = '';
     }
   } catch (err) {
     error = err;
@@ -121,11 +138,11 @@ function compileProducts() {
       <p>Stock: ${product.stock}</p>
     </li>`
     )
-    .join(" ");
+    .join(' ');
   productsList.innerHTML = productsTemplate;
 }
 
-socketClient.on("updatedProducts", (_products) => {
+socketClient.on('updatedProducts', (_products) => {
   products = [..._products];
-  compileProducts()
+  compileProducts();
 });

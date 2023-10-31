@@ -1,77 +1,86 @@
 <h1>Lista de productos</h1>
 <h3>{{error}}</h3>
-<div class="main">
-  <ul id="productsList">
+<div class='main'>
+  <ul id='productsList'>
   </ul>
-  <div class="forms">
-    <form id="addProductForm">
-      <p>Add product</p>
+  <div class='forms'>
+    <form id='addProductForm'>
+      <p>Agregar producto</p>
+      <label for='newProductTitle'>Product Title</label>
       <input
-        type="text"
-        name="newProductTitle"
-        id="newProductTitle"
-        placeholder="Product title"
+        type='text'
+        name='newProductTitle'
+        id='newProductTitle'
+        placeholder='Product title'
       />
+      <label for='newProductDescription'>Product Description</label>
       <input
-        type="text"
-        name="newProductDescription"
-        id="newProductDescription"
-        placeholder="Product description"
+        type='text'
+        name='newProductDescription'
+        id='newProductDescription'
+        placeholder='Product description'
       />
+      <label for='newProductPrice'>Product Price</label>
       <input
-        type="number"
-        name="newProductPrice"
-        id="newProductPrice"
-        placeholder="Product price"
+        type='number'
+        name='newProductPrice'
+        id='newProductPrice'
+        placeholder='Product price'
       />
+      <label for='newProductCode'>Product Code</label>
       <input
-        type="text"
-        name="newProductCode"
-        id="newProductCode"
-        placeholder="Product code"
+        type='text'
+        name='newProductCode'
+        id='newProductCode'
+        placeholder='Product code'
       />
+      <label for='newProductStock'>Product Stock</label>
       <input
-        type="number"
-        name="newProductStock"
-        id="newProductStock"
-        placeholder="Product stock"
+        type='number'
+        name='newProductStock'
+        id='newProductStock'
+        placeholder='Product stock'
       />
+      <label for='newProductCategory'>Product Category</label>
       <input
-        type="text"
-        name="newProductCategory"
-        id="newProductCategory"
-        placeholder="Product category"
+        type='text'
+        name='newProductCategory'
+        id='newProductCategory'
+        placeholder='Product category'
       />
-      <input type="submit" value="SEND" />
+      <input type='submit' value='SEND' />
     </form>
-    <form id="updateProductForm">
-      <p>Update price</p>
+    <form id='updateProductForm'>
+      <p>Precio actualizado</p>
+      <label for='updateProductId'>Product ID</label>
       <input
-        type="text"
-        name="updateProductId"
-        id="updateProductId"
-        placeholder="Product id"
+        type='text'
+        name='updateProductId'
+        id='updateProductId'
+        placeholder='Product id'
       />
+      <label for='updateProductPrice'>Price</label>
       <input
-        type="number"
-        name="updateProductPrice"
-        id="updateProductPrice"
-        placeholder="Price"
+        type='number'
+        name='updateProductPrice'
+        id='updateProductPrice'
+        placeholder='Price'
       />
-      <input type="submit" value="SEND" />
+      <input type='submit' value='SEND' />
     </form>
-    <form id="deleteForm">
-      <p>Delete product</p>
+    <form id='deleteForm'>
+      <p>Eliminar Producto</p>
+      <label for='deleteProductId'>Product ID</label>
       <input
-        type="text"
-        name="deleteProductId"
-        id="deleteProductId"
-        placeholder="Product id"
+        type='text'
+        name='deleteProductId'
+        id='deleteProductId'
+        placeholder='Product id'
       />
-      <input type="submit" value="SEND" />
+      <input type='submit' value='SEND' />
     </form>
   </div>
 </div>
 
-<script src="/socket.io/socket.io.js"></script>
-<script src="/js/realtimeProducts.js"></script>
+<script src='/socket.io/socket.io.js'></script>
+<script src='/js/realtimeProducts.js'></script>
