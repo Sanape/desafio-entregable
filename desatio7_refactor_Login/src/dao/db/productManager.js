@@ -1,5 +1,5 @@
 import Manager from './manager.js';
-import productsModel from '../../handlers/models/product.model.js';
+import productsModel from '../models/product.model.js';
 
 class ProductManager extends Manager {
   constructor() {

@@ -18,6 +18,9 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 import FileStore from 'session-file-store';
 import MongoStore from 'connect-mongo';
+//refactor
+import userRoute from './routes/user.router.js';
+import passport from 'passport';
 
 //Variables
 const app = express();
@@ -28,7 +31,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/public'));
 app.use(morgan('dev'));
 app.use(cookieParser(process.env.COOKIE_SECRET));
-
+app.engine('handlebars', engine());
+app.set('views', __dirname + '/views');
+app.set('view engine', 'handlebars');
 app.use(
   session({
     secret: process.env.COOKIE_SECRET,
@@ -45,48 +50,17 @@ app.use(
     }),
   })
 );
-
-// session file
-// const fileStore = FileStore(session);
-// app.use(
-//   session({
-//     secret: "SESSIONSECRETKEY",
-//     cookie: {
-//       maxAge: 60 * 60 * 1000,
-//     },
-//     store: new fileStore({
-//       path: __dirname + "/sessions",
-//     }),
-//   })
-// );
-
-// session mongo
-
-app.use(
-  session({
-    secret: 'SESSIONSECRETKEY',
-    cookie: {
-      maxAge: 60 * 60 * 1000,
-    },
-    store: new MongoStore({
-      mongoUrl: process.env.DB_URI,
-    }),
-  })
-);
-
-//Handlebars
-app.engine('handlebars', engine());
-app.set('views', __dirname + '/views');
-app.set('view engine', 'handlebars');
+app.use(passport.initialize());
+app.use(passport.session());
 
 //Routes
-app.use('/api/sessions/', sessionRoute);
-app.use('/api/carts/', cartsRoute);
-app.use('/api/products/', productsRoute);
+app.use('/api/carts', cartRoute);
+app.use('/api/products', productRoute);
+app.use('/api/sessions', sessionRoute);
+app.use('/api/users', userRoute);
 app.use('/', viewsRoute);
 
-//Middlewares
-//Global
+//Global middlewares
 app.use(errorHandlerMiddleware);
 
 const httpServer = app.listen(8080, () => {

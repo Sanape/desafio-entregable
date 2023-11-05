@@ -29,23 +29,44 @@
 //}
 import { Schema, model } from 'mongoose';
 import mongoosePaginate from 'mongoose-paginate-v2';
-const productSchema = new Schema({
-  name: {
-    type: String,
-    required: true,
+
+//schema
+const productSchema = new Schema(
+  {
+    title: {
+      type: String,
+      required: true,
+    },
+    description: {
+      type: String,
+    },
+    code: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    status: {
+      type: Boolean,
+      default: false,
+    },
+    stock: {
+      type: Number,
+      default: 0,
+    },
+    category: {
+      type: String,
+      required: true,
+    },
   },
-  price: {
-    type: Number,
-    required: true,
-  },
-  stock: {
-    type: Number,
-    default: 10,
-  },
-  description: {
-    type: String,
-  },
-});
+  {
+    timestamps: true,
+    versionKey: false,
+  }
+);
 
 productSchema.plugin(mongoosePaginate);
 
