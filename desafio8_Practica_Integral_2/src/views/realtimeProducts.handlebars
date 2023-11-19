@@ -1,0 +1,77 @@
+<h1>Lista de productos</h1>
+<h3>{{error}}</h3>
+<div class="main">
+  <ul id="productsList">
+  </ul>
+  <div class="forms">
+    <form id="addProductForm">
+      <p>Add product</p>
+      <input
+        type="text"
+        name="newProductTitle"
+        id="newProductTitle"
+        placeholder="Product title"
+      />
+      <input
+        type="text"
+        name="newProductDescription"
+        id="newProductDescription"
+        placeholder="Product description"
+      />
+      <input
+        type="number"
+        name="newProductPrice"
+        id="newProductPrice"
+        placeholder="Product price"
+      />
+      <input
+        type="text"
+        name="newProductCode"
+        id="newProductCode"
+        placeholder="Product code"
+      />
+      <input
+        type="number"
+        name="newProductStock"
+        id="newProductStock"
+        placeholder="Product stock"
+      />
+      <input
+        type="text"
+        name="newProductCategory"
+        id="newProductCategory"
+        placeholder="Product category"
+      />
+      <input type="submit" value="SEND" />
+    </form>
+    <form id="updateProductForm">
+      <p>Update price</p>
+      <input
+        type="text"
+        name="updateProductId"
+        id="updateProductId"
+        placeholder="Product id"
+      />
+      <input
+        type="number"
+        name="updateProductPrice"
+        id="updateProductPrice"
+        placeholder="Price"
+      />
+      <input type="submit" value="SEND" />
+    </form>
+    <form id="deleteForm">
+      <p>Delete product</p>
+      <input
+        type="text"
+        name="deleteProductId"
+        id="deleteProductId"
+        placeholder="Product id"
+      />
+      <input type="submit" value="SEND" />
+    </form>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/realtimeProducts.js"></script>
