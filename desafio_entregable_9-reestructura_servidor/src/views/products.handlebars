@@ -1,0 +1,14 @@
+<h2>Bienvenido {{role}}: {{first_name}} {{last_name}}! Esta es la lista de productos:</h2>
+<button onclick="location.href = '/api/sessions/current'">Mi Perfil</button>
+<button onclick="location.href = '/api/users/logout'">Log Out</button>
+<div id="renderData">
+    {{#each products}}
+    <div>
+        <p>{{title}}</p>
+        <p>Precio: ${{price}}</p>
+    </div>
+    <div>
+        <button><a href="http://localhost:8080/products/{{_id}}">Ver Detalles</a></button>
+    </div>
+    {{/each}}
+</div>
