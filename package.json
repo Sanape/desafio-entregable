@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "mongoose-aggregate-paginate-v2": "^1.0.6"
+  },
+  "devDependencies": {
+    "supertest": "^6.3.3"
+  }
+}
